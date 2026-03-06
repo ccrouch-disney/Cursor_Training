@@ -1,0 +1,21 @@
+subscriber_id,plan_name,signup_date,monthly_revenue,region,is_active
+SUB001,Premium,2024-01-15,13.99,North America,True
+SUB002,Basic,2024-02-20,7.99,Europe,True
+SUB003,Premium,2024-01-10,13.99,North America,False
+SUB004,Basic,2024-03-05,7.99,Asia Pacific,True
+SUB005,Premium,2024-02-28,13.99,Europe,True
+SUB006,Ad-Supported,2024-04-01,0.00,North America,True
+SUB007,Basic,2024-01-22,7.99,North America,False
+SUB008,Premium,2024-03-15,13.99,Asia Pacific,True
+SUB009,Ad-Supported,2024-05-10,0.00,Europe,True
+SUB010,Basic,2024-02-14,7.99,North America,True
+SUB011,Premium,2024-04-20,13.99,North America,True
+SUB012,Ad-Supported,2024-03-30,0.00,Asia Pacific,False
+SUB013,Basic,2024-01-08,7.99,Europe,True
+SUB014,Premium,2024-05-01,13.99,North America,True
+SUB015,Basic,2024-02-11,7.99,Asia Pacific,True
+SUB016,Ad-Supported,2024-04-15,0.00,North America,True
+SUB017,Premium,2024-03-22,13.99,Europe,False
+SUB018,Basic,2024-01-30,7.99,North America,True
+SUB019,Premium,2024-05-05,13.99,Asia Pacific,True
+SUB020,Ad-Supported,2024-02-18,0.00,Europe,True

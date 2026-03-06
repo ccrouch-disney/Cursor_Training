@@ -1,0 +1,27 @@
+---
+description: Python coding standards for BI Enablement projects
+globs: "**/*.py"
+alwaysApply: false
+---
+
+# Python Standards
+
+## Style
+- Use type hints for function arguments and return values
+- Use f-strings for string formatting (not `.format()` or `%`)
+- Use `pathlib.Path` instead of `os.path` for file operations
+- Prefer `pandas` for tabular data manipulation
+
+## Structure
+- Put reusable functions in separate modules, not everything in one script
+- Use `if __name__ == "__main__":` for scripts that should be runnable
+- Use `argparse` for command-line arguments when a script takes inputs
+
+## Error Handling
+- Always handle Snowflake connection errors gracefully with a clear message
+- Log errors with context (what was being attempted, which table/view)
+- Use `try/except` around external calls (API requests, database queries, file I/O)
+
+## Dependencies
+- Pin dependencies in `requirements.txt` with versions
+- Use `uv pip install -r requirements.txt` to install

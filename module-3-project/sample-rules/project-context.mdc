@@ -1,0 +1,25 @@
+---
+description: BI Enablement team context, tech stack, and conventions
+alwaysApply: true
+---
+
+# Project Context
+
+## Team
+This project belongs to the BI Enablement team. We build data pipelines, analytics, and reporting.
+
+## Tech Stack
+- **Data Warehouse:** Snowflake
+  - Schema: `BI_ENABLEMENT_CW`
+  - Roles follow the pattern: `BI_ENABLEMENT_CW_*`
+- **Visualization:** Tableau (connected to Snowflake via key-pair authentication)
+- **Language:** Python 3.12+
+- **Package Management:** uv (preferred) or pip
+- **Version Control:** Git + GitHub
+
+## Conventions
+- SQL identifiers use UPPER_CASE (e.g., `SELECT SUBSCRIBER_ID FROM BI_ENABLEMENT.MY_VIEW`)
+- Python files use snake_case naming
+- Every project has a README.md explaining its purpose
+- Configuration values go in YAML files, not hardcoded in scripts
+- Secrets and key files (*.p8) are never committed to git -- add them to .gitignore
