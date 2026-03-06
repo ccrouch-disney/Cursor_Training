@@ -1,34 +1,52 @@
 # GitHub Setup Guide for the BI Enablement Team
 
-This guide walks you through getting set up on GitHub -- both the public github.com (where the Cursor Training repo lives) and the enterprise GitHub at github.twdcgrid.net.
+Everything for our team lives on **github.com** under the [dss-data-arch](https://github.com/dss-data-arch) organization (Disney Streaming Services Data Architecture). This includes the Looker repo, BI Enablement, and all our team projects.
 
-Pick the tier that matches what you need right now. You can always come back and do the next tier later.
+This guide gets you set up step by step.
 
 ---
 
-## Tier 1: View Only (No Account Needed)
+## Quick Start: Just Viewing the Training Repo
 
 The [Cursor_Training repo](https://github.com/ccrouch-disney/Cursor_Training) is public. You can:
 
 - **Browse** all files directly at https://github.com/ccrouch-disney/Cursor_Training
 - **Download everything** as a ZIP: click the green **Code** button > **Download ZIP**
 
-This is enough to follow along with the training course. If that's all you need right now, you're done.
+This is enough to follow along with the training course. But to work with the team's repos (Looker, BI Enablement, etc.), keep going.
 
 ---
 
-## Tier 2: github.com Account (For Cloning Repos and Using Git)
-
-If you want to clone repos, push code, or access private repositories on github.com, you need a free account.
-
-### Step 1: Create a GitHub Account
+## Step 1: Create a GitHub Account
 
 1. Go to [github.com/signup](https://github.com/signup)
 2. Use your **work email address**
 3. Choose a username (something recognizable like `firstname-lastname-disney`)
 4. Complete the email verification
 
-### Step 2: Install the GitHub CLI
+If you already have a github.com account, skip to Step 2.
+
+---
+
+## Step 2: Get Added to the dss-data-arch Org
+
+You need to be a member of the **dss-data-arch** organization to access the team's private repos. Ask your manager or an org admin to invite you.
+
+Once invited, you'll get an email from GitHub. Click the link to accept the invitation.
+
+**Our team's repos in dss-data-arch:**
+
+| Repo | What It Is |
+|------|------------|
+| `dss-data-arch/bi_enablement` | BI Enablement Composable Workspace |
+| `dss-data-arch/looker-test` | Looker development and testing |
+| `dss-data-arch/bitools` | Shared BI tooling |
+| `dss-data-arch/perf_intel_bi` | Performance intelligence BI |
+| `dss-data-arch/launch_hq` | Launch HQ reporting |
+
+---
+
+## Step 3: Install the GitHub CLI
 
 The GitHub CLI (`gh`) handles authentication so you don't have to manage tokens manually. In your terminal (or Cursor's built-in terminal):
 
@@ -42,7 +60,9 @@ Verify it installed:
 gh --version
 ```
 
-### Step 3: Authenticate
+---
+
+## Step 4: Authenticate
 
 Run this command and follow the prompts:
 
@@ -71,126 +91,81 @@ github.com
   Active account: true
 ```
 
-### Step 4: Clone the Training Repo
+---
+
+## Step 5: Authorize SSO for the dss-data-arch Org
+
+**This is the #1 source of "I'm logged in but it says permission denied" errors.**
+
+The dss-data-arch org uses SAML SSO. GitHub requires you to **explicitly authorize your credentials** for SSO-protected orgs -- it does not happen automatically.
+
+**After running `gh auth login`, do this:**
+
+1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
+2. Click **Tokens (classic)** in the sidebar if you don't see your tokens
+3. Find the token created by `gh auth login` (it will be the most recent one)
+4. Look for **dss-data-arch** in the SSO section next to the token
+5. Click **Authorize**
+6. Complete the SSO sign-in flow (your corporate login)
+
+If you're using SSH keys instead of HTTPS:
+1. Go to [github.com/settings/keys](https://github.com/settings/keys)
+2. Next to your SSH key, click **Configure SSO**
+3. Authorize it for **dss-data-arch**
+
+**You must do this step or you will not be able to clone, push, or pull from any dss-data-arch repo.**
+
+---
+
+## Step 6: Clone a Repo
+
+Now you can clone any repo you have access to:
+
+```
+git clone https://github.com/dss-data-arch/bi_enablement.git
+```
+
+Or the training repo:
 
 ```
 git clone https://github.com/ccrouch-disney/Cursor_Training.git
 ```
 
-This creates a `Cursor_Training` folder with all the course materials.
-
-### Step 5: Authorize SSO (If You Join a Disney Org on github.com)
-
-This is the most common source of "I'm logged in but it says permission denied" errors.
-
-When an organization uses SAML SSO on github.com, you have to **explicitly authorize your credentials** for that org. GitHub doesn't do this automatically.
-
-**If you get a permission error accessing an org's private repos:**
-
-1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
-2. Find your active token (the one created by `gh auth login`)
-3. Next to the org name, click **Authorize** (or **Enable SSO**)
-4. Complete the SSO sign-in flow
-
-If you're using SSH keys instead of HTTPS:
-1. Go to [github.com/settings/keys](https://github.com/settings/keys)
-2. Next to your SSH key, click **Configure SSO**
-3. Authorize it for the org
-
-After authorizing, retry the `git clone` or `git push` that failed.
-
----
-
-## Tier 3: Enterprise GitHub (github.twdcgrid.net)
-
-The enterprise GitHub is a completely separate system from github.com. Different accounts, different logins, different repos. Think of them as two unrelated websites that happen to look the same.
-
-### Step 1: Log In to Enterprise GitHub
-
-1. Go to [github.twdcgrid.net](https://github.twdcgrid.net)
-2. Sign in with your **corporate SSO credentials** (the same login you use for other internal tools)
-
-If login fails:
-- Try an **incognito/private browser window** (clears stale cookies)
-- Make sure you're on the corporate network or VPN
-- Clear your browser cookies for `github.twdcgrid.net` and try again
-- If it still fails, contact IT -- your account may need to be provisioned or migrated
-
-### Step 2: Authenticate the GitHub CLI for Enterprise
-
-The `gh` CLI supports multiple GitHub instances. To add the enterprise one:
-
-```
-gh auth login --hostname github.twdcgrid.net
-```
-
-When it asks:
-- **Preferred protocol?** --> `HTTPS`
-- **Authenticate with?** --> `Login with a web browser`
-
-Follow the browser flow just like you did for github.com.
-
-### Step 3: Verify Both Accounts
-
-Run this to see all your authenticated GitHub accounts:
-
-```
-gh auth status
-```
-
-You should see two entries:
-
-```
-github.com
-  Logged in to github.com account your-username
-  Active account: true
-
-github.twdcgrid.net
-  Logged in to github.twdcgrid.net account your-corp-username
-  Active account: true
-```
-
-### Step 4: Cloning Enterprise Repos
-
-When cloning from the enterprise GitHub, the URL uses `github.twdcgrid.net` instead of `github.com`:
-
-```
-git clone https://github.twdcgrid.net/your-org/your-repo.git
-```
-
-Git and `gh` will automatically use the correct credentials based on the hostname.
-
 ---
 
 ## Troubleshooting
 
-### "Permission denied" when cloning or pushing
+### "Permission denied" or "403" when cloning or pushing
 
-**On github.com:** Your token likely isn't SSO-authorized. Follow [Step 5 in Tier 2](#step-5-authorize-sso-if-you-join-a-disney-org-on-githubcom).
+This almost always means your token isn't SSO-authorized for dss-data-arch. Go back to [Step 5](#step-5-authorize-sso-for-the-dss-data-arch-org) and authorize SSO.
 
-**On github.twdcgrid.net:** Run `gh auth login --hostname github.twdcgrid.net` to re-authenticate.
+### "Repository not found" when cloning a dss-data-arch repo
 
-### "I can log into github.com but not github.twdcgrid.net" (or vice versa)
-
-These are completely separate systems. Having an account on one does not give you access to the other. You need separate logins for each.
+Two possible causes:
+1. You haven't been added to the org yet -- ask an admin to invite you
+2. Your token isn't SSO-authorized -- go back to [Step 5](#step-5-authorize-sso-for-the-dss-data-arch-org)
 
 ### "My token stopped working after a migration"
 
 Org migrations can invalidate SSO authorizations. Re-authorize your token:
 1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
 2. Find your token
-3. Re-authorize it for the new/migrated org
+3. Click **Authorize** next to **dss-data-arch** again
+4. Complete the SSO flow
 
 ### "Cursor can't push or pull"
 
-Cursor uses whatever git credentials are configured in its built-in terminal. Fix this by running `gh auth login` **from inside Cursor's terminal** (Ctrl+`), not from a separate Terminal.app window. This ensures the credential helper is set up for Cursor's environment.
+Cursor uses whatever git credentials are configured in its built-in terminal. Fix this by running `gh auth login` **from inside Cursor's terminal** (Ctrl+`), not from a separate Terminal.app window. Then authorize SSO (Step 5) again if needed.
 
-### "I'm not sure which GitHub I should be using"
+### "I also have access to github.twdcgrid.net -- what's that?"
 
-- **github.com** -- Public repos, open source, personal projects, and the Cursor Training repo
-- **github.twdcgrid.net** -- Internal/enterprise repos, production code, anything that's company-private
+That's a separate enterprise GitHub instance. Some teams use it, but our team's repos live on **github.com** under **dss-data-arch**. If you need access to twdcgrid for other work, you can authenticate the CLI for it separately:
 
-When in doubt, ask the team.
+```
+gh auth login --hostname github.twdcgrid.net
+```
+
+This won't affect your github.com authentication -- they're independent.
 
 ### Quick diagnostic command
 
